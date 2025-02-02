@@ -179,10 +179,56 @@
       padding: 2rem;
     }
     
-    a {
+    /* ===== Modal Styles ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .modal-content {
+      background-color: #2a2a2a;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: #fff;
       text-decoration: none;
-      color: inherit;
-      display: block;
+      cursor: pointer;
+    }
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .modal button {
+      padding: 10px 20px;
+      background-color: #1DA1F2;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .modal button:hover {
+      background-color: #0d8ddf;
     }
   </style>
 </head>
@@ -214,6 +260,7 @@
                 <img src="https://cdn.prod.website-files.com/602bb4fef9fa885b85f30bf7/63fc95a4b753330eb9da03e9_embed%20video%20on%20google%20slides%20waybook.png" alt="Google Slides">
                 <div class="card-title">Google Slides</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
           </div>
         </div>
@@ -231,42 +278,49 @@
                 <img src="https://www.partitaiva.it/wp-content/uploads/2023/03/Chat-GPT-plugin.jpg" alt="ChatGPT">
                 <div class="card-title">ChatGPT</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://www.krea.ai" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://www.krea.ai" alt="Krea.ai">
                 <div class="card-title">Krea.ai</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://www.midjourney.com" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://www.midjourney.com" alt="Midjourney">
                 <div class="card-title">Midjourney</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://magnific.ai/editor/" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://magnific.ai/editor/" alt="Magnific.ai">
                 <div class="card-title">Magnific.ai</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://flim.ai" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://flim.ai" alt="Flim.ai">
                 <div class="card-title">Flim.ai</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://runwayml.com" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://runwayml.com" alt="RunwayML">
                 <div class="card-title">RunwayML</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://firefly.adobe.com" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://firefly.adobe.com" alt="Adobe Firefly">
                 <div class="card-title">Adobe Firefly</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
           </div>
         </div>
@@ -284,48 +338,66 @@
                 <img src="https://image.thum.io/get/width/1200/crop/1000/https://app.raindrop.io" alt="Raindrop.io">
                 <div class="card-title">Raindrop.io</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://it.pinterest.com" target="_blank">
                 <img src="https://assets.turbologo.com/blog/it/2021/11/14093628/pinterest-958x575.png" alt="Pinterest">
                 <div class="card-title">Pinterest</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://www.art-dept.com/photography/?sid=57116/" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://www.art-dept.com" alt="Art Dept">
                 <div class="card-title">Art Dept</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://www.artpartner.com" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://www.artpartner.com" alt="Art Partner">
                 <div class="card-title">Art Partner</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://eyecannndy.com" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://eyecannndy.com" alt="Eyecannndy">
                 <div class="card-title">Eyecannndy</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://flim.ai" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://flim.ai" alt="Flim.ai">
                 <div class="card-title">Flim.ai</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
             <div class="card">
               <a href="https://shotdeck.com/welcome/home" target="_blank">
                 <img src="https://image.thum.io/get/width/800/crop/1000/https://shotdeck.com" alt="Shotdeck">
                 <div class="card-title">Shotdeck</div>
               </a>
+              <button class="edit-btn" onclick="openModal(this)">Edit</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  
+  <!-- Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Edit Card</h2>
+      <input type="text" id="newImageUrl" placeholder="New Image URL">
+      <input type="text" id="newCardTitle" placeholder="New Card Title">
+      <button onclick="saveChanges()">Save Changes</button>
+    </div>
+  </div>
   
   <!-- ===== JavaScript per aggiornare l'orologio ===== -->
   <script>
@@ -336,6 +408,22 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-  </script>
-</body>
-</html>
+  
+    // Modal functionality
+    let currentEditBtn;
+
+    function openModal(btn) {
+      currentEditBtn = btn;
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    function saveChanges() {
+      const newImageUrl = document.getElementById('newImageUrl').value;
+      const newCardTitle = document.getElementById('newCardTitle').value;
+
+      if (newImageUrl) {
+        currentEditBtn.parentElement.querySelector('img').src = newImageUrl
