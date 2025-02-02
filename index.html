@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Minimal</title>
+  <!-- FontAwesome per le icone social -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+        integrity="sha512-tfEwYFwH1ZwyZsE8N1yT7sG4Y9Zlp9r/p+Sj6peO0LzhYnwRPOCspbT5ydhLUVG0U7In6j1jrK9dYB05P5a5w==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* ===== Reset e stili di base ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #090909;
+      /* Pattern di puntini grigio scuro */
+      background-image: radial-gradient(circle, rgba(80,80,80,0.3) 1px, transparent 1px);
+      background-size: 20px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 80px;
+    }
+    
+    /* ===== Header ===== */
+    header {
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      position: relative;
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .widget-container {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .widget {
+      background: rgba(50,50,50,0.8);
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+    }
+    .widget:hover {
+      background: rgba(40,40,40,0.9);
+    }
+    /* Social icons in alto a destra */
+    .social-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .social-icons a {
+      color: #fff;
+      font-size: 1.6rem;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #1DA1F2;
+    }
+    /* Parola italiana casuale accanto ai widget (in piccolo, bold) */
+    .random-word {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .random-word a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .random-word a:hover {
+      color: #1DA1F2;
+    }
+    
+    /* ===== Main Content ===== */
+    #main-content {
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 45px;
+      padding: 0 15px;
+    }
+    
+    /* ===== Frame (Cornice) ===== */
+    .frame {
+      position: relative;
+      background-color: rgba(50,50,50,0.8);
+      border-radius: 22px;
+      padding: 2.2rem;
+      box-shadow: 0 16.5px 55px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      transform-origin: center;
+      overflow: hidden;
+    }
+    .frame:hover {
+      transform: scale(1.005);
+      background-color: rgba(40,40,40,0.85);
+    }
+    .inner-wrapper {
+      transition: transform 0.3s ease;
+      transform-origin: center;
+    }
+    .frame:hover .inner-wrapper {
+      transform: scale(0.995);
+    }
+    .frame-title {
+      font-size: 3.8rem;
+      line-height: 3.8rem;
+      font-weight: 100;
+      text-align: center;
+      margin-bottom: 45px;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.3s ease, font-weight 0.3s ease;
+    }
+    .frame:hover .frame-title {
+      color: #fff;
+      font-weight: 600;
+    }
+    .frame-body {
+      position: relative;
+    }
+    
+    /* ===== Container delle card ===== */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    
+    /* ===== Card ===== */
+    .card {
+      background-color: #2a2a2a;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.0325);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 22px;
+      background-color: #2a2a2a;
+    }
+    .card.card-large {
+      grid-column: span 3;
+      height: 180px;
+    }
+    
+    /* ===== Tag (titolo) della card ===== */
+    .card-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      /* La tag sarà leggermente più larga della card per coprire eventuali spazi */
+      width: calc(100% + 4%);
+      margin-left: -2%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: 200;
+      background-color: #2a2a2a;
+      color: #fff;
+      text-align: center;
+      border-radius: 0 0 22px 22px;
+      z-index: 10;
+      transition: font-weight 0.3s ease;
+    }
+    .card-title:hover {
+      font-weight: 700;
+    }
+    .card.card-large .card-title {
+      width: calc(100% + 8%);
+      margin-left: -4%;
+      padding: 1.5rem;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header con widget, icone social e parola italiana casuale -->
+  <header>
+    <div class="widget-container">
+      <div id="clock" class="widget">--:--:--</div>
+      <div id="weather" class="widget">Sunny, 25°C</div>
+    </div>
+    <div class="social-icons">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="random-word" id="random-word">
+      <!-- La parola verrà impostata via JavaScript -->
+    </div>
+  </header>
+  
+  <!-- Main Content con frame -->
+  <main id="main-content">
+    <!-- Frame "Deck" -->
+    <div class="frame" data-frame="deck">
+      <h2 class="frame-title">Deck</h2>
+      <div class="frame-body">
+        <div class="inner-wrapper">
+          <div class="card-container">
+            <div class="card card-large">
+              <a href="https://docs.google.com/presentation/u/0/" target="_blank">
+                <!-- Anteprima di Google Slides: riempie tutta la card -->
+                <img src="https://cdn.prod.website-files.com/602bb4fef9fa885b85f30bf7/63fc95a4b753330eb9da03e9_embed%20video%20on%20google%20slides%20waybook.png" alt="Google Slides">
+                <div class="card-title">Google Slides</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Frame "Tools" -->
+    <div class="frame" data-frame="tools">
+      <h2 class="frame-title">Tools</h2>
+      <div class="frame-body">
+        <div class="inner-wrapper">
+          <div class="card-container">
+            <div class="card card-large">
+              <a href="https://chatgpt.com" target="_blank">
+                <!-- Anteprima di ChatGPT: riempie tutta la card -->
+                <img src="https://www.partitaiva.it/wp-content/uploads/2023/03/Chat-GPT-plugin.jpg" alt="ChatGPT">
+                <div class="card-title">ChatGPT</div>
+              </a>
+            </div>
+            <!-- Altre card del frame "Tools" -->
+            <div class="card">
+              <a href="https://www.krea.ai" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://www.krea.ai" alt="Krea.ai">
+                <div class="card-title">Krea.ai</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://www.midjourney.com" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://www.midjourney.com" alt="Midjourney">
+                <div class="card-title">Midjourney</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://magnific.ai/editor/" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://magnific.ai/editor/" alt="Magnific.ai">
+                <div class="card-title">Magnific.ai</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://flim.ai" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://flim.ai" alt="Flim.ai">
+                <div class="card-title">Flim.ai</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://runwayml.com" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://runwayml.com" alt="RunwayML">
+                <div class="card-title">RunwayML</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://firefly.adobe.com" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://firefly.adobe.com" alt="Adobe Firefly">
+                <div class="card-title">Adobe Firefly</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Frame "Reference" -->
+    <div class="frame" data-frame="reference">
+      <h2 class="frame-title">Reference</h2>
+      <div class="frame-body">
+        <div class="inner-wrapper">
+          <div class="card-container">
+            <div class="card card-large">
+              <a href="https://app.raindrop.io/my/0" target="_blank">
+                <img src="https://image.thum.io/get/width/1200/crop/1000/https://app.raindrop.io" alt="Raindrop.io">
+                <div class="card-title">Raindrop.io</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://it.pinterest.com" target="_blank">
+                <img src="https://assets.turbologo.com/blog/it/2021/11/14093628/pinterest-958x575.png" alt="Pinterest">
+                <div class="card-title">Pinterest</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://www.art-dept.com/photography/?sid=57116/" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://www.art-dept.com" alt="Art Dept">
+                <div class="card-title">Art Dept</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://www.artpartner.com" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://www.artpartner.com" alt="Art Partner">
+                <div class="card-title">Art Partner</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://eyecannndy.com" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://eyecannndy.com" alt="Eyecannndy">
+                <div class="card-title">Eyecannndy</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://flim.ai" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://flim.ai" alt="Flim.ai">
+                <div class="card-title">Flim.ai</div>
+              </a>
+            </div>
+            <div class="card">
+              <a href="https://shotdeck.com/welcome/home" target="_blank">
+                <img src="https://image.thum.io/get/width/800/crop/1000/https://shotdeck.com" alt="Shotdeck">
+                <div class="card-title">Shotdeck</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- ===== JavaScript per aggiornare l'orologio e scegliere una parola casuale ===== -->
+  <script>
+    // Aggiorna l'orologio
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+    
+    // Array di parole italiane casuali
+    const italianWords = ["Amore", "Libertà", "Bellezza", "Sapere", "Passione", "Speranza", "Virtù", "Armonia"];
+    
+    // Seleziona casualmente una parola e imposta il link a Wikipedia
+    const randomIndex = Math.floor(Math.random() * italianWords.length);
+    const randomWord = italianWords[randomIndex];
+    const randomWordElem = document.getElementById("random-word");
+    // Il link punta a Wikipedia (assumendo che la prima lettera sia maiuscola)
+    randomWordElem.innerHTML = `<a href="https://it.wikipedia.org/wiki/${encodeURIComponent(randomWord)}" target="_blank">${randomWord}</a>`;
+  </script>
+</body>
+</html>
