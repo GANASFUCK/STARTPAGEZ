@@ -138,7 +138,7 @@
       overflow: hidden;
       position: relative;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border: 1px solid #fff;
+      border: 1px solid rgba(50,50,50,0.8);
     }
     .card:hover {
       transform: scale(1.0325);
@@ -242,7 +242,6 @@
     </div>
     <div class="social-icons">
       <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
       <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
@@ -427,4 +426,5 @@
       const newCardTitle = document.getElementById('newCardTitle').value;
 
       if (newImageUrl) {
-        currentEditBtn.parentElement.querySelector('img').src =
+        currentEditBtn.parentElement.querySelector('img').src = newImageUrl;
+      }
