@@ -72,23 +72,6 @@
     .social-icons a:hover {
       color: #1DA1F2;
     }
-    /* Parola italiana casuale, posizionata in alto a destra, in maiuscolo */
-    .random-word {
-      position: absolute;
-      top: 20px;
-      right: 90px;  /* Spostata accanto alle icone social */
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    .random-word a {
-      color: #fff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .random-word a:hover {
-      color: #1DA1F2;
-    }
     
     /* ===== Main Content ===== */
     #main-content {
@@ -206,7 +189,7 @@
   </style>
 </head>
 <body>
-  <!-- Header con widget, icone social e parola italiana casuale -->
+  <!-- Header con widget e icone social -->
   <header>
     <div class="widget-container">
       <div id="clock" class="widget">--:--:--</div>
@@ -217,9 +200,6 @@
       <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
       <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-    <div class="random-word" id="random-word">
-      <!-- La parola verrà impostata via JavaScript -->
     </div>
   </header>
   
@@ -349,7 +329,7 @@
     </div>
   </main>
   
-  <!-- ===== JavaScript per aggiornare l'orologio e scegliere una parola casuale ===== -->
+  <!-- ===== JavaScript per aggiornare l'orologio ===== -->
   <script>
     // Aggiorna l'orologio
     function updateClock() {
@@ -358,14 +338,6 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-    
-    // Array di parole italiane casuali
-    const italianWords = ["Amore", "Libertà", "Bellezza", "Sapere", "Passione", "Speranza", "Virtù", "Armonia"];
-    // Seleziona casualmente una parola e imposta il link a Wikipedia
-    const randomIndex = Math.floor(Math.random() * italianWords.length);
-    const randomWord = italianWords[randomIndex];
-    const randomWordElem = document.getElementById("random-word");
-    randomWordElem.innerHTML = `<a href="https://it.wikipedia.org/wiki/${encodeURIComponent(randomWord)}" target="_blank">${randomWord}</a>`;
   </script>
 </body>
 </html>
